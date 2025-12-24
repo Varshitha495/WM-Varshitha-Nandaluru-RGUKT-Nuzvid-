@@ -1,6 +1,8 @@
-#Smart Waste Bin Network
-#Virtual IoT Design Challenge
-#Problem Statement
+Smart Waste Bin Network
+
+Virtual IoT Design Challenge
+
+Problem Statement
 
 Urban areas face serious inefficiencies in waste collection. In many locations, waste bins overflow before collection, while in other areas bins are collected even when they are half empty. This leads to poor hygiene, unpleasant surroundings, inefficient use of manpower, increased fuel consumption, and higher operational costs for municipalities. The lack of real-time monitoring is the core reason behind these issues.
 
@@ -16,33 +18,33 @@ This system is designed as a virtual IoT solution, focusing on architecture, wor
 
 Hardware Description
 
-Each smart waste bin includes the following hardware components:
+-Each smart waste bin includes the following hardware components:
 
-Ultrasonic sensor to measure the fill level of the bin
+-Ultrasonic sensor to measure the fill level of the bin
 
-Microcontroller to process sensor data
+-Microcontroller to process sensor data
 
-Wi-Fi communication module for data transmission
+-Wi-Fi communication module for data transmission
 
-Power supply unit
+-Power supply unit
 
-The ultrasonic sensor measures the distance between the sensor and the waste surface. As the bin fills up, this distance decreases. The microcontroller converts this data into a percentage fill level and sends it to the cloud.
+-The ultrasonic sensor measures the distance between the sensor and the waste surface. As the bin fills up, this distance decreases. The microcontroller converts this data into a percentage fill level and sends it to the cloud.
 
-Detailed hardware block diagrams and architecture are provided in the Hardware/Hardware_Architecture folder.
+-Detailed hardware block diagrams and architecture are provided in the Hardware/Hardware_Architecture folder.
 
 Software Description
 
-The software part of the system handles data acquisition, processing, transmission, and visualization.
+-The software part of the system handles data acquisition, processing, transmission, and visualization.
 
-Embedded software reads sensor data and calculates fill percentage
+-Embedded software reads sensor data and calculates fill percentage
 
-Communication logic sends data to the cloud platform
+-Communication logic sends data to the cloud platform
 
-Cloud-side logic stores and processes incoming data
+-Cloud-side logic stores and processes incoming data
 
-Dashboard displays real-time bin status
+-Dashboard displays real-time bin status
 
-The software flow and architecture are explained in the Software/Software_Architecture folder, and related code or logic is placed in the Software/Codes folder.
+-The software flow and architecture are explained in the Software/Software_Architecture folder, and related code or logic is placed in the Software/Codes folder.
 
 Working Principle
 
