@@ -1,6 +1,5 @@
 Smart Waste Bin Network
-
-Virtual IoT Design Challenge
+-Virtual IoT Design Challenge
 
 Problem Statement
 
