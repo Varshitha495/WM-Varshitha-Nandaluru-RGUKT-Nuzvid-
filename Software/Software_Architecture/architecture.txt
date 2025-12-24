@@ -1,1 +1,13 @@
+Software Architecture Description – Smart Waste Bin Network
+
+The software architecture follows a cloud-based IoT model.
+
+Components:
+- IoT Data Ingestion Layer: Receives data from smart bins.
+- Database Layer: Stores bin fill-level data and timestamps.
+- Processing Layer: Analyzes bin status and identifies overflow risks.
+- Application Layer: Displays real-time data on a dashboard.
+
+The architecture enables real-time monitoring, alert generation,
+and decision support for optimized waste collection.
 
