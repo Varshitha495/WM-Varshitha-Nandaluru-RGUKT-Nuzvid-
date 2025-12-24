@@ -1,1 +1,17 @@
+This file explains the conceptual hardware logic of the
+Smart Waste Bin Network.
+
+1. An ultrasonic sensor is placed inside the waste bin to
+   measure the fill level.
+
+2. The sensor data is read by a microcontroller
+   (such as ESP32 or Arduino).
+
+3. The microcontroller processes the sensor data and converts
+   it into a percentage fill level.
+
+4. The processed data is transmitted to the cloud server
+   using a communication module (Wi-Fi/GSM/LoRa).
+
+This is a logic-level explanation for a virtual IoT design.
 
