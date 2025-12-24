@@ -1,6 +1,6 @@
-Smart Waste Bin Network
-Virtual IoT Design Challenge
-Problem Statement
+#Smart Waste Bin Network
+#Virtual IoT Design Challenge
+#Problem Statement
 
 Urban areas face serious inefficiencies in waste collection. In many locations, waste bins overflow before collection, while in other areas bins are collected even when they are half empty. This leads to poor hygiene, unpleasant surroundings, inefficient use of manpower, increased fuel consumption, and higher operational costs for municipalities. The lack of real-time monitoring is the core reason behind these issues.
 
