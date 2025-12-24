@@ -1,5 +1,6 @@
 ## System Flowchart
 The flowchart below represents the overall working of the Smart Waste Bin system, from sensing the waste level to updating the cloud platform.
 
-![System Flowchart](flow.png)
+![System Flowchart](downloads/flow.png)
+
 
