@@ -1,115 +1,187 @@
-Smart Waste Bin Network
--Virtual IoT Design Challenge
+# Smart Waste Bin Network  
+Virtual IoT Design Challenge
 
-Problem Statement
+---
 
-Urban areas face serious inefficiencies in waste collection. In many locations, waste bins overflow before collection, while in other areas bins are collected even when they are half empty. This leads to poor hygiene, unpleasant surroundings, inefficient use of manpower, increased fuel consumption, and higher operational costs for municipalities. The lack of real-time monitoring is the core reason behind these issues.
+## 1. Problem Definition
+Conventional waste collection systems operate on fixed schedules without real-time visibility of bin utilization. This results in bin overflow in high-demand areas and inefficient use of collection resources in low-demand areas.  
 
+The objective of this system is to design an IoT-based waste monitoring framework that enables condition-based waste collection using real-time sensing and centralized decision making.
 
-Objective
+---
 
-The objective of this project is to design a Smart Waste Bin Network using IoT concepts that can monitor the fill level of waste bins in real time and help authorities make informed decisions regarding waste collection and route optimization.
+## 2. System Architecture Overview
+The system is divided into four logical layers:
 
+- Sensing Layer  
+- Edge Processing Layer  
+- Communication Layer  
+- Cloud and Application Layer  
 
-System Overview
+Each layer is designed with specific technology choices justified based on system constraints.
 
-The proposed system consists of multiple smart waste bins equipped with sensors and a microcontroller. Each bin continuously monitors its fill level and transmits the data to a central cloud platform using wireless communication. The collected data is visualized on a dashboard, enabling authorities to identify which bins require immediate attention and plan optimized collection routes.
+---
 
-This system is designed as a virtual IoT solution, focusing on architecture, working principle, and system design rather than physical deployment.
+## 3. Sensing Layer
 
+### 3.1 Sensor Selection
+**Sensor Used:** Ultrasonic Distance Sensor  
 
-Hardware Description
+### 3.2 Reason for Selection
+- Non-contact measurement avoids sensor damage due to waste  
+- Reliable operation across varying waste types  
+- Low cost and low power consumption  
+- Suitable for measuring fill level in enclosed bins  
 
--Each smart waste bin includes the following hardware components:
+### 3.3 Function
+The ultrasonic sensor measures the distance between the sensor mounted at the top of the bin and the waste surface. This distance is converted into a fill percentage based on the known bin height.
 
--Ultrasonic sensor to measure the fill level of the bin
+---
 
--Microcontroller to process sensor data
+## 4. Edge Processing Layer
 
--Wi-Fi communication module for data transmission
+### 4.1 Controller Used
+**Controller:** ESP32 Microcontroller  
 
--Power supply unit
+### 4.2 Reason for Selection
+- Built-in wireless communication capability  
+- Sufficient computational power for local preprocessing  
+- Low power operation suitable for battery-based systems  
+- Widely supported development ecosystem  
 
--The ultrasonic sensor measures the distance between the sensor and the waste surface. As the bin fills up, this distance decreases. The microcontroller converts this data into a percentage fill level and sends it to the cloud.
+### 4.3 Edge Algorithm
+**Algorithm Used:** Threshold-Based Fill Level Evaluation  
 
--Detailed hardware block diagrams and architecture are provided in the Hardware/Hardware_Architecture folder.
+### 4.4 Algorithm Description
+- Sensor readings are sampled periodically  
+- Distance values are converted into fill percentage  
+- A predefined threshold is applied  
+- If the fill level exceeds the threshold, the bin is marked as critical  
 
+### 4.5 Reason for Algorithm Choice
+- Simple and deterministic decision making  
+- Low computational overhead  
+- Suitable for real-time event detection  
+- Easy to scale across multiple bins  
 
-Software Description
+---
 
--The software part of the system handles data acquisition, processing, transmission, and visualization.
+## 5. Communication Layer
 
--Embedded software reads sensor data and calculates fill percentage
+### 5.1 Protocol Used
+**Protocol:** MQTT  
 
--Communication logic sends data to the cloud platform
+### 5.2 Reason for Selection
+- Lightweight messaging protocol suitable for IoT devices  
+- Low bandwidth consumption  
+- Supports publish–subscribe architecture  
+- Reliable message delivery with minimal overhead  
 
--Cloud-side logic stores and processes incoming data
+### 5.3 Communication Strategy
+- Event-driven data transmission  
+- Data sent only when threshold conditions are met  
+- Reduces network congestion and power usage  
 
--Dashboard displays real-time bin status
+---
 
--The software flow and architecture are explained in the Software/Software_Architecture folder, and related code or logic is placed in the Software/Codes folder.
+## 6. Cloud Processing Layer
 
+### 6.1 Cloud Functions
+- Data ingestion from multiple bin nodes  
+- Time-stamped data storage  
+- Status classification of bins  
+- Aggregation of critical bins  
 
-Working Principle
+### 6.2 Cloud Algorithm
+**Algorithm Used:** Rule-Based Classification  
 
--The ultrasonic sensor measures the distance to the waste level inside the bin
+### 6.3 Algorithm Description
+- Incoming bin data is compared against defined fill-level rules  
+- Bins are classified as normal or critical  
+- Critical bins are flagged for collection  
 
--The microcontroller processes the sensor data
+### 6.4 Reason for Algorithm Choice
+- Transparent and explainable decision logic  
+- Easy to modify thresholds based on policy  
+- Suitable for early-stage smart city deployments  
 
--Fill level information is transmitted to the cloud using Wi-Fi
+---
 
--The cloud platform updates the database
+## 7. Application and Decision Layer
 
--A dashboard displays the current status of all bins
+### 7.1 Dashboard Functionality
+- Real-time visualization of bin status  
+- Priority-based bin listing  
+- Summary of collection requirements  
 
--Authorities use this information to schedule waste collection efficiently
+### 7.2 Decision Strategy
+- Only bins marked as critical are considered for collection  
+- Enables condition-based waste collection  
+- Eliminates unnecessary collection trips  
 
+---
 
-Key Features
+## 8. Route Optimization Strategy
 
--Real-time waste level monitoring
+### 8.1 Role of Route Optimization in the System
+The Smart Waste Bin Network identifies bins that require collection based on real-time fill-level data. Once bins are classified as critical, a route optimization strategy is applied to determine an efficient collection sequence for waste collection vehicles.
 
--Prevention of bin overflow
+Route optimization is treated as a downstream decision module that consumes processed bin data from the cloud layer.
 
--Reduced unnecessary waste collection trips
+---
 
--Improved cleanliness and hygiene
+### 8.2 Input to the Route Optimization Module
+The optimization module receives the following inputs from the cloud system:
 
--Optimized fuel and manpower usage
+- List of bins marked as critical  
+- Geographical coordinates of each bin  
+- Vehicle capacity constraints  
+- Depot or starting location of the collection vehicle  
 
+---
 
-Applications
+### 8.3 Optimization Strategy Used
+**Strategy:** Priority-Based Shortest Path Routing  
 
--Smart cities
+### 8.4 Algorithm Description
+- Bins are filtered based on critical status  
+- Critical bins are sorted based on urgency level  
+- Bins are grouped geographically to reduce travel distance  
+- Within each group, the shortest path between bins is computed  
+- Routes are updated dynamically as new bin events are received  
 
--Municipal waste management systems
+### 8.5 Algorithm Choice Justification
+This strategy is selected because:
+- It minimizes total travel distance  
+- It reduces fuel consumption and collection time  
+- It supports incremental updates when new bins become critical  
+- It avoids computational complexity of full vehicle routing solvers  
+- It is suitable for real-time smart city deployments  
 
--Public places such as railway stations, malls, and campuses
+---
 
+## 9. Integration with the IoT System
+- Route optimization is executed at the cloud layer  
+- Optimized routes are exposed to the dashboard  
+- The IoT system remains decoupled from vehicle navigation logic  
+- Routing logic can be replaced without modifying sensing or communication layers  
 
-Future Enhancements
+---
 
--Integration of GPS for location-based tracking
+## 10. Optional Enhancements (Future Scope)
+- Traffic-aware routing  
+- Multi-vehicle coordination  
+- Machine learning-based demand prediction  
 
--AI-based prediction of waste generation patterns
+---
 
--Mobile application for waste management authorities
+## 11. Scalability Considerations
+- Independent operation of each bin node  
+- Event-driven communication reduces network load  
+- Cloud architecture supports horizontal scaling  
+- Additional bins can be added without system redesign  
 
--Automated route optimization using machine learning
+---
 
-
-Repository Structure
-
-This repository is organized according to the assessment guidelines:
-
--Software: Contains software codes and architecture explanations
-
--Hardware: Contains hardware-related codes and architecture diagrams
-
--Images: Contains system diagrams and visual representations
-
-
-Conclusion
-
-The Smart Waste Bin Network demonstrates how IoT technology can significantly improve urban waste management. By enabling real-time monitoring and data-driven decision-making, the system helps reduce operational costs, improve hygiene, and support sustainable smart city development.
-
+## 12. Conclusion
+This system demonstrates a technically justified IoT architecture for smart waste management. Each design choice, including sensor selection, communication protocol, and algorithm design, is made to ensure reliability, scalability, and efficient decision making in urban environments.
